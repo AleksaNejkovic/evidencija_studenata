@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content%}
+<div class="container">
+
+  <div class="row justify-content-center my-5">
+
+      <img src="/static/logo.png">
+
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col-lg-6 col-xs-12">
+
+
+      <form action="{{url_for('login')}}" method="POST">
+        <!--email-->
+
+        <div class="form-group">
+           <label for="email">Email address</label>
+           <input type="email" class="form-control" id="email" aria-describedby="emailHelp" name="email" required>
+        </div>
+
+        <!--password-->
+        
+        <div class="form-group">
+          <label for="lozinka">Password</label>
+          <input type="password" class="form-control" id="lozinka" name="lozinka" required>
+        </div>
+  
+        <!--button-->
+        
+        <button type="submit" class="btn btn-primary">Sacuvaj</button>
+  
+      </form>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+{% endblock %}

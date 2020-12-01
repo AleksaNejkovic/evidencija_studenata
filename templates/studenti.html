@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block content%}
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <a class="navbar-brand" href="#">Evidencija studenata</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="{{ url_for('studenti') }}">Studenti</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('predmeti') }}">Predmeti</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('korisnici') }}">Korisnici</a>
+      </li>
+    </ul>
+    
+    <a href="{{url_for('logout')}}"><i class="fas fa-sign-out-alt" style="color: #ffffff"></i></a>
+    
+    
+
+  </div>
+</nav>
+
+
+
+<div class="container">
+	
+	<div class='row justify-content-end my-5'>
+        <a class="btn btn-primary" href="{{ url_for('novi_student') }}" role="button">Dodaj studenta</a>
+	</div>
+	<div class='row justify-content-center'>
+		<table class="table table-dark">
+			<thead>
+			    <tr>
+			      <th scope="col">Broj indexa</th>
+			      <th scope="col">Ime</th>
+			      <th scope="col">Ime roditelja</th>
+			      <th scope="col">Prezime</th>
+			      <th scope="col">Godina studija</th>
+			      <th scope="col">ESPB</th>
+			      <th scope="col">Prosek ocena</th>
+			      <th scope="col">Akcije</th>
+			    </tr>
+			</thead>
+			<tbody>
+				{% for student in studenti %}
+			    <tr>
+			    	
+			      	<td>{{student.broj_indexa}}</td>
+			      	<td>{{student.ime}}</td>
+			      	<td>{{student.ime_roditelja}}</td>
+			      	<td>{{student.prezime}}</td>
+			      	<td>{{student.godina_studija}}</td>
+			      	<td>{{student.ESPB}}</td>
+			      	<td>{{student.prosek_ocena}}</td>
+			      	<td>
+			      	<a class="icon-btn blue" href="{{url_for('student', id=student.id)}}" role="button"><i class="far fa-eye"></i></a>
+			      	<a class="icon-btn orange" href="{{url_for('student_izmena', id=student.id)}}" role="button"><i class="fas fa-edit"></i></a>
+			      	<form style="display: inline;" action="{{ url_for('studenti_brisanje', id=student.id) }}">
+			      		<button class="icon-btn red">
+			      			<i class="fas fa-trash-alt"></i>
+			      		</button>
+			      	</form>
+			      	</td>
+			    </tr>
+			    {% endfor %}
+			</tbody>
+		</table>
+	</div>
+	
+
+</div>
+{% endblock %}

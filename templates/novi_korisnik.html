@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block content%}
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <a class="navbar-brand" href="#">Evidencija studenata</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item ">
+        <a class="nav-link" href="{{ url_for('studenti') }}">Studenti</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('predmeti') }}">Predmeti</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="{{ url_for('korisnici') }}">Korisnici</a>
+      </li>
+    </ul>
+
+   <a href="{{url_for('logout')}}"><i class="fas fa-sign-out-alt" style="color: #ffffff"></i></a>
+
+  </div>
+</nav>
+
+
+
+<div class="container">
+	
+	<div class="row justify-content-right">
+    <div class="col-lg-6 col-xs-12">
+
+      <h3 class="my-5">Novi korisnik</h3>
+      
+      <form style="width: 20em" action="{{ url_for('novi_korisnik')}}" method="POST">
+
+        <!--Ime-->
+
+        <div class="form-group">
+           <label for="Ime">Ime</label>
+           <input type="text" class="form-control" id="Ime" name="ime">
+        </div>
+
+        <!--Prezime-->
+
+        <div class="form-group">
+           <label for="Prezime">Prezime</label>
+           <input type="text" class="form-control" id="Prezime" name="prezime">
+        </div>
+
+        <!--Email-->
+
+        <div class="form-group">
+           <label for="email_korisnik">Email</label>
+           <input type="email" class="form-control" id="email_korisnik" aria-describedby="emailHelp" name="email_nk">
+        </div>
+
+        <!--Lozinka-->
+
+        <div class="form-group">
+          <label for="lozinka_korisnik">Lozinka</label>
+          <input type="password" class="form-control" id="lozinka_korisnik" name="sifra">
+        </div>
+        <button type="submit" class="btn btn-primary">Sacuvaj</button>
+  
+      </form>
+
+
+    </div>
+  </div>
+	
+
+</div>
+{% endblock %}

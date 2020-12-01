@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block content%}
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <a class="navbar-brand" href="#">Evidencija studenata</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('studenti') }}">Studenti</a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link" href="{{ url_for('predmeti') }}">Predmeti</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="{{ url_for('korisnici') }}">Korisnici</a>
+      </li>
+    </ul>
+
+    <a href="{{url_for('logout')}}"><i class="fas fa-sign-out-alt" style="color: #ffffff"></i></a>
+
+  </div>
+</nav>
+
+
+
+<div class="container">
+	
+	<div class='row justify-content-end my-5'>
+        <a class="btn btn-primary" href="{{ url_for('novi_korisnik') }}" role="button">Dodaj korisnika</a>
+	</div>
+	<div class='row justify-content-center'>
+		<table class="table table-dark">
+			<thead>
+			    <tr>
+			      <th scope="col">Ime</th>
+			      <th scope="col">Prezime</th>
+			      <th scope="col">Email</th>
+			      <th scope="col">Akcije</th>
+			      
+			      
+			    </tr>
+			</thead>
+			<tbody>
+				{% for korisnik in korisnici %}
+
+			    <tr>
+			      <td>{{korisnik.ime}}</td>
+			      <td>{{korisnik.prezime}}</td>
+			      <td>{{korisnik.email}}</td>
+			      <td>
+			      	
+			      	<a class="icon-btn orange" href="{{ url_for('korisnik_izmena', id=korisnik.id) }}" role="button"><i class="fas fa-edit"></i></a>
+			      	<form style="display: inline;" action="{{ url_for('korisnik_brisanje', id=korisnik.id) }}">
+			      		<button class="icon-btn red">
+			      			<i class="fas fa-trash-alt"></i>
+			      		</button>
+			      	</form>
+			      </td>
+			    </tr>
+
+			    {% endfor %}
+			</tbody>
+		</table>
+	</div>
+	
+
+</div>
+{% endblock %}

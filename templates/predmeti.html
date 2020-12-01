@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block content%}
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <a class="navbar-brand" href="#">Evidencija studenata</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('studenti') }}">Studenti</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="{{ url_for('predmeti') }}">Predmeti</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('korisnici') }}">Korisnici</a>
+      </li>
+    </ul>
+
+    <a href="{{url_for('logout')}}"><i class="fas fa-sign-out-alt" style="color: #ffffff"></i></a>
+
+  </div>
+</nav>
+
+<div class="container">
+	<div class='row justify-content-end my-5'>
+        <a class="btn btn-primary" href="{{ url_for('novi_predmet') }}" role="button">Dodaj predmet</a>
+	</div>
+	<div class='row justify-content-center'>
+		<table class="table table-dark">
+			<thead>
+			    <tr>
+			      <th scope="col">Sifra</th>
+			      <th scope="col">Naziv</th>
+			      <th scope="col">Godina studija</th>
+			      <th scope="col">ESPB</th>
+			      <th scope="col">Obavezni/Izborni</th>
+			      <th scope="col">Akcije</th>
+			      
+			    </tr>
+			</thead>
+			<tbody>
+				{% for predmet in predmeti %}
+			    <tr>
+			     	
+			      	<td>{{predmet.sifra}}</td>
+			      	<td>{{predmet.naziv}}</td>
+			      	<td>{{predmet.godina_studija}}</td>
+			      	<td>{{predmet.ESPB}}</td>
+			      	<td>{{predmet.obavezni_izborni}}</td>
+			      	<td>
+				      	<a style="text-decoration:none;"class="icon-btn orange" href="{{ url_for('predmet_izmena',id=predmet.id) }}" role="button">
+				      		<i class="fas fa-edit"></i>
+				      	</a>
+				      	<form style="display: inline;" action="{{ url_for('predmet_brisanje',id=predmet.id) }}">
+				      		<button class="icon-btn red">
+				      			<i class="fas fa-trash-alt"></i>
+				      		</button>
+				      	</form>
+			      	</td>
+			    </tr>
+			    {% endfor %}
+			</tbody>
+		</table>
+	</div>
+</div>
+{% endblock %}
